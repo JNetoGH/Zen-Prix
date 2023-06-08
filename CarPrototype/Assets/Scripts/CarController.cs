@@ -91,7 +91,7 @@ public class CarController : MonoBehaviour
         if (!other.gameObject.tag.Equals("SpeedBooster"))
             return;
         _speedBoostAuxForce = 100;
-        Debug.Log("Speed Booster");
+        Debug.Log("Speed Booster in");
     }
     
     private void OnTriggerExit(Collider other)
@@ -99,6 +99,6 @@ public class CarController : MonoBehaviour
         if (!other.gameObject.tag.Equals("SpeedBooster"))
             return;
         _speedBoostAuxForce = 0;
-        Debug.Log("Speed Booster");
+        Debug.Log("Speed Booster out");
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -7,11 +6,16 @@ public class LapCounter : MonoBehaviour
     
     public const int TotLaps = 3;
     public int CurrentLap { get; private set; }
+    
     [SerializeField] private GameObject _initialInvisibleWall; 
     [SerializeField] private TextMeshProUGUI _textUI;
     
     [SerializeField] private GameObject _player;
     [SerializeField] private Timer _timer;
+    
+    [SerializeField] private GameObject _lastScreen;
+    [SerializeField] private TextMeshProUGUI _lastScreenMainText;
+    [SerializeField] private TextMeshProUGUI _lastScreenDescriptionText;
 
     private void UpdateLapUI() =>  _textUI.text = $"LAP: {CurrentLap}/{TotLaps}";
     
@@ -30,6 +34,7 @@ public class LapCounter : MonoBehaviour
         if (CurrentLap == 1)
         {
             _timer.ReleaseTimer();
+            ZenBarController.Run = true;
             if (_initialInvisibleWall is not null)
                 Destroy(_initialInvisibleWall);
         }
@@ -45,28 +50,30 @@ public class LapCounter : MonoBehaviour
     {
         Invoke(nameof(StopPlayer), 0.18f);
         _timer.StopTimer();
-        float endTime = _timer.InnerTimer;
-        Debug.Log($"final time: {endTime}");
+        ZenBarController.Run = false;
+        float rawTime = _timer.InnerTimer;
+        int totZenPoints = ZenBarController.ZenPoints;
+        float timeBonusPerZenPoint = ZenBarController.TimeBonusPerZenPoint;
+        float finalTime = rawTime - totZenPoints * timeBonusPerZenPoint;
+        _lastScreenMainText.text = $"Final Time: {finalTime:F0}s";
+        _lastScreenDescriptionText.text = $"Raw Time = {rawTime:F0}s\n" +
+                                          $"Zen Points = {totZenPoints}\n" +
+                                          $"Discount = {totZenPoints * timeBonusPerZenPoint:F0}s ({totZenPoints} * {timeBonusPerZenPoint:F0}s)";
+        _lastScreen.SetActive(true);
+        Debug.Log($"final time: {rawTime}");
     }
     
     void Start()
     {
         ResetTotLaps();
+        _lastScreen.SetActive(false);
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!other.gameObject.tag.Equals("Player"))
-            return;
-        AddLap();
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.tag.Equals("Player"))
             return;
         AddLap();
     }
-    
     
 }
