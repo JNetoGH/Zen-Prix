@@ -343,13 +343,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 363669698724820265}
+  - component: {fileID: 1402017946753927319}
   - component: {fileID: 363669698725243142}
   - component: {fileID: 363669698725243146}
   - component: {fileID: 363669698725243140}
   - component: {fileID: 363669698732497609}
   m_Layer: 0
   m_Name: MyCar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,6 +373,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1402017946753927319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363669698725243145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47c796b6a5146fb89242039f210cb07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &363669698725243142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,8 +434,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4172702, y: 0.36394113, z: 1.1781704}
-  m_Center: {x: -0.015749559, y: 0.20414403, z: 0.023020625}
+  m_Size: {x: 0.4172702, y: 0.30947524, z: 1.1781704}
+  m_Center: {x: -0.015749559, y: 0.23137698, z: 0.023020625}
 --- !u!95 &363669698732497609
 Animator:
   serializedVersion: 5

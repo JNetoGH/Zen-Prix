@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -6,6 +7,7 @@ public class CarController : MonoBehaviour
     [Header("Car Settings")]
     [SerializeField] private float _maxSteerAngle = 30;
     [SerializeField] private float _motorForce = 50;
+    private float _speedBoostAuxForce = 0;
 
     [Header("Front Left Wheel")]
     [SerializeField] private WheelCollider _wheelColliderFrontLeft;
@@ -52,7 +54,7 @@ public class CarController : MonoBehaviour
     
     private void Accelerate()
     {
-        float torque = _motorForce * _verticalInput;
+        float torque = _motorForce * _verticalInput + _speedBoostAuxForce;
         
         // gives torque to the front wheels
         _wheelColliderFrontLeft.motorTorque = torque;
@@ -84,4 +86,19 @@ public class CarController : MonoBehaviour
         transform.rotation = currentRotation;
     }
     
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.tag.Equals("SpeedBooster"))
+            return;
+        _speedBoostAuxForce = 100;
+        Debug.Log("Speed Booster");
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.tag.Equals("SpeedBooster"))
+            return;
+        _speedBoostAuxForce = 0;
+        Debug.Log("Speed Booster");
+    }
 }
