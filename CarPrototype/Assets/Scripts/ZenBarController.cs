@@ -12,9 +12,9 @@ public class ZenBarController : MonoBehaviour
     public const float TimeBonusPerZenPoint = 5f;
     public const float SliderDurationInSec = 15f;
     public const float BarDecrementPerHit = 5f;
-    
-    public static int ZenPoints { get; private set; }
-    public static float BarTimer { get; private set; }
+
+    public static int ZenPoints { get; private set; } = 0;
+    public static float BarTimer { get; private set; } = 0;
     
     [SerializeField] private TextMeshProUGUI _textUI;
     [SerializeField] private Slider _slider;

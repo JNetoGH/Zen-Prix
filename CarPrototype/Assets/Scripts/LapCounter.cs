@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class LapCounter : MonoBehaviour
 {
+
+    public static int FinalTime { get; private set; } = 0;
     
-    public const int TotLaps = 3;
+    public const int TotLaps = 1;
     public int CurrentLap { get; private set; }
     
     [SerializeField] private GameObject _initialInvisibleWall; 
@@ -23,6 +25,7 @@ public class LapCounter : MonoBehaviour
     
     private void ResetTotLaps()
     {
+        FinalTime = 0;
         CurrentLap = 0;
         UpdateLapUI();
     }
@@ -54,8 +57,8 @@ public class LapCounter : MonoBehaviour
         float rawTime = _timer.InnerTimer;
         int totZenPoints = ZenBarController.ZenPoints;
         float timeBonusPerZenPoint = ZenBarController.TimeBonusPerZenPoint;
-        float finalTime = rawTime - totZenPoints * timeBonusPerZenPoint;
-        _lastScreenMainText.text = $"Final Time: {finalTime:F0}s";
+        FinalTime = (int)(rawTime - totZenPoints * timeBonusPerZenPoint);
+        _lastScreenMainText.text = $"Final Time: {FinalTime:F0}s";
         _lastScreenDescriptionText.text = $"Raw Time = {rawTime:F0}s\n" +
                                           $"Zen Points = {totZenPoints}\n" +
                                           $"Discount = {totZenPoints * timeBonusPerZenPoint:F0}s ({totZenPoints} * {timeBonusPerZenPoint:F0}s)";
