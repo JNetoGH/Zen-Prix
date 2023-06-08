@@ -18836,6 +18836,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 363669698725243142, guid: 184c3450847dc3248ac8a833e43d1231, type: 3}
+      propertyPath: _steerSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 363669698725243142, guid: 184c3450847dc3248ac8a833e43d1231, type: 3}
+      propertyPath: _maxSteerAngle
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 363669698725243145, guid: 184c3450847dc3248ac8a833e43d1231, type: 3}
       propertyPath: m_Name
       value: MyCar
