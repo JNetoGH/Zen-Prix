@@ -1,3 +1,4 @@
+using System;
 using LootLocker.Requests;
 using TMPro;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine.UI;
 
 public class LeaderboardController : MonoBehaviour
 {
-    
-    
+
+    private bool scolledUpOnce = false;
+    private const int NameMaxLength = 12;
     [SerializeField] private int _maxScores = 1000;
     [SerializeField] private TMP_InputField _memberID;
     [SerializeField] private Button _submitButton;
@@ -29,7 +31,7 @@ public class LeaderboardController : MonoBehaviour
             }
         });
     }
-
+    
     public void ClearLeaderboard()
     {
         for (int i = 0; i < _leaderboardContentContainer.transform.childCount; i++)
@@ -60,18 +62,20 @@ public class LeaderboardController : MonoBehaviour
                 Debug.Log("Leaderboard Loading Failed");
             }
         });
-        // send the scroll bar to the top
-        _scrollbar.value = 1;
     }
     
     public void SubmitScore()
     {
-        string label = _memberID.text + $" | ZP={ZenBarController.ZenPoints}";
+        string playerName = _memberID.text.Equals(string.Empty) || _memberID.text is null ? "Unnamed" : _memberID.text;
+        if (playerName.Length > NameMaxLength)
+            playerName = playerName.Substring(0, NameMaxLength);
+        string label = $"{playerName} ({ DateTime.UtcNow.ToString("d/M/yy-HH:m:s") })";
         LootLockerSDKManager.SubmitScore(label, LapCounter.FinalTime, "zen-prix-lb", (response) =>
         {
             if (response.success)
             {
                 Debug.Log("Leaderboard Submit Success");
+                LoadScores();
             }
             else
             {
@@ -79,6 +83,13 @@ public class LeaderboardController : MonoBehaviour
             }
         });
         _submitButton.gameObject.SetActive(false);
-        LoadScores();
+    }
+    
+    private void Update()
+    {
+        if (scolledUpOnce) return;
+        scolledUpOnce = true;
+        // send the scroll bar to the top
+        _scrollbar.value = 1;
     }
 }

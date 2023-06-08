@@ -6,7 +6,7 @@ public class LapCounter : MonoBehaviour
 
     public static int FinalTime { get; private set; } = 0;
     
-    public const int TotLaps = 1;
+    public const int TotLaps = 3;
     public int CurrentLap { get; private set; }
     
     [SerializeField] private GameObject _initialInvisibleWall; 
