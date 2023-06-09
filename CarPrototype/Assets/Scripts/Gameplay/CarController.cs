@@ -6,7 +6,7 @@ public class CarController : MonoBehaviour
     
     [Header("Car Settings")]
     [SerializeField] private float _maxSteerAngle = 20;
-    [SerializeField] private float _motorForce = 50;
+    [SerializeField] private float _motorForce = 100;
     private float _speedBoostAuxForce = 0;
     
     [Header("Front Left Wheel")]
