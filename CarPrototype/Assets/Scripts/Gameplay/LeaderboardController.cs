@@ -19,17 +19,17 @@ public class LeaderboardController : MonoBehaviour
     
     private void Start()
     {
-        StartCoroutine(LogInLeaderboardRoutine());
+        StartCoroutine(StartLeaderboardRoutine());
     }
 
-    private IEnumerator LogInLeaderboardRoutine()
+    private IEnumerator StartLeaderboardRoutine()
     {
         bool done = false;
         LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (response.success)
             {
-                Debug.LogWarning("Leaderboard Start Success");
+                Debug.LogWarning("Leaderboard Start Succeed");
                 LoadScores();
                 done = true;
             }
@@ -39,10 +39,10 @@ public class LeaderboardController : MonoBehaviour
                 done = true;
             }
         });
-        yield return new WaitWhile((() => done == false));
+        yield return new WaitWhile(() => done == false);
     }
     
-    public void ClearLeaderboard()
+    private void ClearLeaderboard()
     {
         for (int i = 0; i < _leaderboardContentContainer.transform.childCount; i++)
         {
@@ -50,14 +50,14 @@ public class LeaderboardController : MonoBehaviour
         }
     }
     
-    public void LoadScores()
+    private void LoadScores()
     {
         ClearLeaderboard();
         LootLockerSDKManager.GetScoreList("zen-prix-lb", _maxScores, (response) =>
         {
             if (response.success)
             {
-                Debug.Log($"Leaderboard Loading Success tot members {response.items.Length}");
+                Debug.LogWarning($"Leaderboard Loading Succeed: total members {response.items.Length}");
                 
                 LootLockerLeaderboardMember[] members = response.items;
                 foreach (LootLockerLeaderboardMember m in members)
@@ -69,7 +69,7 @@ public class LeaderboardController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Leaderboard Loading Failed");
+                Debug.LogWarning("Leaderboard Loading Failed");
             }
         });
     }
@@ -84,12 +84,12 @@ public class LeaderboardController : MonoBehaviour
         {
             if (response.success)
             {
-                Debug.Log("Leaderboard Submit Success");
+                Debug.LogWarning("Leaderboard Submit Succeed");
                 LoadScores();
             }
             else
             {
-                Debug.Log("Leaderboard Submit Failed");
+                Debug.LogWarning("Leaderboard Submit Succeed");
             }
         });
         _submitButton.gameObject.SetActive(false);
