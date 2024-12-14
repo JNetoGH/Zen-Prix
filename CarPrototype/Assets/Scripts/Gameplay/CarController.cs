@@ -5,7 +5,7 @@ public class CarController : MonoBehaviour
 {
     
     [Header("Car Settings")]
-    [SerializeField] private float _maxSteerAngle = 25;
+    [SerializeField] private float _maxSteerAngle = 20;
     [SerializeField] private float _motorForce = 100;
     private float _speedBoostAuxForce = 0;
     
@@ -46,7 +46,6 @@ public class CarController : MonoBehaviour
     private void Steer()
     {
         _currentSteerAngle = _maxSteerAngle * _horizontalInput;
-        Debug.Log($"Steering angle {_currentSteerAngle}");
         
         // updates only the front wheels steer angle
         _wheelColliderFrontLeft.steerAngle = _currentSteerAngle;
