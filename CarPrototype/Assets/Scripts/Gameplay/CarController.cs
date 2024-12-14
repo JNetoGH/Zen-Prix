@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+
 
 public class CarController : MonoBehaviour
 {
@@ -46,7 +46,7 @@ public class CarController : MonoBehaviour
     private void Steer()
     {
         _currentSteerAngle = _maxSteerAngle * _horizontalInput;
-        Debug.LogWarning($"Steering angle {_currentSteerAngle}");
+        Debug.Log($"Steering angle {_currentSteerAngle}");
         
         // updates only the front wheels steer angle
         _wheelColliderFrontLeft.steerAngle = _currentSteerAngle;

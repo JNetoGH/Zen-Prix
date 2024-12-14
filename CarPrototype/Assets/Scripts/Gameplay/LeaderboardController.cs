@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using LootLocker.Requests;
 using TMPro;
 using UnityEngine;
@@ -18,18 +19,27 @@ public class LeaderboardController : MonoBehaviour
     
     private void Start()
     {
-        LootLockerSDKManager.StartGuestSession("Player", (response) =>
+        StartCoroutine(LogInLeaderboardRoutine());
+    }
+
+    private IEnumerator LogInLeaderboardRoutine()
+    {
+        bool done = false;
+        LootLockerSDKManager.StartGuestSession((response) =>
         {
             if (response.success)
             {
-                Debug.Log("Leaderboard Start Success");
+                Debug.LogWarning("Leaderboard Start Success");
                 LoadScores();
+                done = true;
             }
             else
             {
-                Debug.Log("Leaderboard Start Failed");
+                Debug.LogWarning("Leaderboard Start Failed");
+                done = true;
             }
         });
+        yield return new WaitWhile((() => done == false));
     }
     
     public void ClearLeaderboard()
