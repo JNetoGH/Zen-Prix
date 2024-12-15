@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: LootLockerConfig
   m_EditorClassIdentifier: 
   apiKey: dev_9c3d62eb3a5e46aaa23e3d6f83f1be26
-  token: b57bb72b170173e948115816803db3bdf06fe58c
-  adminToken: 9032d5a1eb5c336de250f5a7ea7f793bc05dd2cf
+  token: 
+  adminToken: 
   refreshToken: 
-  domainKey: jubixj9i
+  domainKey: 
   gameID: 0
   game_version: 1.0.0.0
   sdk_version: 3.6.0
-  deviceID: c4ac2a25-b721-4f20-baae-a97921068c80
-  playerULID: 01JF3FXA0FSNSPWP7458D3HYV5
-  url: https://api.lootlocker.io/v1
-  adminUrl: https://jubixj9i.api.lootlocker.com/admin
-  playerUrl: https://jubixj9i.api.lootlocker.com/player
-  userUrl: https://jubixj9i.api.lootlocker.com/game
-  baseUrl: https://jubixj9i.api.lootlocker.com
-  clientSideRequestTimeOut: 5
-  currentDebugLevel: 3
+  deviceID: 
+  playerULID: 
+  url: https://api.lootlocker.com/v1
+  adminUrl: https://api.lootlocker.com/admin
+  playerUrl: https://api.lootlocker.com/player
+  userUrl: https://api.lootlocker.com/game
+  baseUrl: https://api.lootlocker.com
+  clientSideRequestTimeOut: 180
+  currentDebugLevel: 0
   allowTokenRefresh: 1
